@@ -10,7 +10,7 @@ from rest_framework import generics                     # Generic Views
 from rest_framework import mixins                       # Mixins proporcionan metodos básicos de comportamiento de las views 
 
 from rest_framework import permissions
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly, IsSelfOrReadOnly
 
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
@@ -43,7 +43,8 @@ class DirectorView(generics.GenericAPIView, mixins.ListModelMixin, mixins.Create
     def post(self, request):
         return self.create(request)
 
-class DirectorDetailsView(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin):
+class DirectorDetailsView(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]#, IsSelfOrReadOnly]
     serializer_class = DirectorSerializer
 
     queryset = User.objects.all()
@@ -55,7 +56,7 @@ class DirectorDetailsView(generics.GenericAPIView, mixins.RetrieveModelMixin, mi
         return self.update(request, pk)
     
     def delete(self, request, pk):
-        return self.delete(request, pk)
+        return self.destroy(request, pk)
 
 
 

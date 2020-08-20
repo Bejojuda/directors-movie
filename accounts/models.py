@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 ''''
 class Director(models.Model):
@@ -18,6 +19,8 @@ class Movie(models.Model):
         ('Thriller', 'Thriller'),
         ('Horror', 'Horror'),
         ('Romance', 'Romance'),
+        ('Mystery', 'Mystery'),
+        ('Sci-fic', 'Sci-fic')
     ]
     name = models.CharField(max_length=30)
     duration = models.DurationField()
@@ -26,7 +29,10 @@ class Movie(models.Model):
 
     # 'auth.user' permite el uso de la clase User al momento de crear el serializer
     # related_name es el nombre colocado en el fields
-    director = models.ForeignKey('auth.User', related_name='movies', on_delete=models.CASCADE)
+    # director = models.ForeignKey('auth.User', related_name='movies', on_delete=models.CASCADE)
+
+    # settigs.AUTH_USER_MODEL referencia al usuario logueado actualmente
+    director = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='movies', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
