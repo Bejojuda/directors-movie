@@ -25,7 +25,7 @@ def api_root(request, format=None):
         'Movies': reverse('movie-list', request=request, format=format)
     })
 
-|
+
 class DirectorView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     serializer_class = DirectorSerializer            # El serializer utilizado para la validación, envio y recepción de data
 
