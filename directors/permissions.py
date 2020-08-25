@@ -2,7 +2,7 @@ from rest_framework import permissions
 from django.conf import settings
 
 
-class IsOwnerOrReadOnly(permissions.BasePermission):
+class IsSelfOrReadOnly(permissions.BasePermission):
     """
     Custom permission to only allow owners of an object to edit it.
     """
@@ -14,4 +14,4 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         # Write permissions are only allowed to the owner of the snippet.
-        return obj.director == request.user
+        return settings.AUTH_USER_MODEL == request.user
