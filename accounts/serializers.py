@@ -3,17 +3,18 @@ from .models import *
 
 
 
-class MovieSerializer(serializers.HyperlinkedModelSerializer):
+class MovieSerializer(serializers.ModelSerializer):
     director = serializers.ReadOnlyField(source='director.username')
 
     class Meta:
         model = Movie
     
-        fields = ['url', 'name', 'director', 'duration', 'genre', 'description']
-
+        fields = ['id', 'name', 'director', 'duration', 'genre', 'description']
+        
+# SERIALIZER PEQUEÑO
 '''
 
-
+ 
 # MODEL SERIALIZER
 
 class DirectorSerializer(serializers.ModelSerializer):

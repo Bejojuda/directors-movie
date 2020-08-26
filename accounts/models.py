@@ -31,7 +31,7 @@ class Movie(models.Model):
     # related_name es el nombre colocado en el fields
     # director = models.ForeignKey('auth.User', related_name='movies', on_delete=models.CASCADE)
 
-    # settigs.AUTH_USER_MODEL referencia al usuario logueado actualmente
+    # settigs.AUTH_USER_MODEL referencia al usuario autenticado actualmente
     director = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='movies', on_delete=models.CASCADE)
 
     def __str__(self):

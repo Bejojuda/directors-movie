@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',                 # Permite el uso de tokens para autentificación
     'accounts',
+    'directors',
 ]
+    # ************************ Se debe agregar para que se use a los directores para la validación ***********************
+AUTH_USER_MODEL = 'directors.Director'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

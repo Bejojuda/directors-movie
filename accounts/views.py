@@ -40,7 +40,6 @@ class MovieView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateMod
 
         
     def perform_create(self, serializer):
-
         serializer.save(director=self.request.user)
 
 
