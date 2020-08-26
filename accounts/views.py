@@ -52,7 +52,7 @@ class MovieDetailsView(generics.GenericAPIView, mixins.RetrieveModelMixin, mixin
     def get(self, request, pk):
         return self.retrieve(request)
 
-    def put(self, request, pk):
+    def patch(self, request, pk):
         return self.update(request, pk)
     
     def delete(self, request, pk):

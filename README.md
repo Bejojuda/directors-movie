@@ -32,15 +32,15 @@ Provide links to the directors/ and movies/ end points
      - POST/: Creates a new user with the following fields:
 
           ```json
-            {
-                "username": "YOUR_USERNAME",
-                "password": "YOUR_PASSWORD"
-            }
+          {
+               "username": "YOUR_USERNAME",
+               "password": "YOUR_PASSWORD"
+          }
           ```
 
 - "directors/id/" - Specific director's details:
      - GET/: get the attributes of the specific director
-     - PUT/: (Requires Token) update the user password
+     - PATCH/: (Requires Token) update the user password
      - DELETE/: (Requires Token) delete the user
      
 - "movies/" - Movie List:
@@ -57,5 +57,5 @@ Provide links to the directors/ and movies/ end points
   
  - "movies/id/" - Specific movie details:
      - GET/: Specific movie details
-     - PUT/: update the movie attributes. Requires authorization header: 
+     - PATCH/: (Requires Token) update the movie attributes.
      - DELETE/: (Requires Token and to be the owner) delete the movie

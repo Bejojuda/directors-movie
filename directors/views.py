@@ -10,13 +10,13 @@ from rest_framework import permissions
 from django.contrib.auth.hashers import make_password
 
 class DirectorView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
-    serializer_class = DirectorSerializer            # El serializer utilizado para la validación, envio y recepción de data
+    serializer_class = DirectorSerializer            
 
-    queryset = Director.objects.all()                # El query set determina las instancias de qué modelo van a ser utilizadas en la Generic View
+    queryset = Director.objects.all()
 
 
     def get(self, request):
-        return self.list(request)               # .list() crea una lista a partir de un queryset
+        return self.list(request)               
 
     def post(self, request):
        return self.create(request)
@@ -26,7 +26,7 @@ class DirectorView(generics.GenericAPIView, mixins.ListModelMixin, mixins.Create
         return Director.objects.create_user(**serializer.validated_data)
 
 class DirectorDetailsView(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]#, IsSelfOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsSelfOrReadOnly]
     serializer_class = DirectorSerializer
 
     queryset = Director.objects.all()
@@ -34,8 +34,12 @@ class DirectorDetailsView(generics.GenericAPIView, mixins.RetrieveModelMixin, mi
     def get(self, request, pk):
         return self.retrieve(request)
 
-    def put(self, request, pk):
+    def patch(self, request, pk):
         return self.update(request, pk)
     
     def delete(self, request, pk):
         return self.destroy(request, pk)
+
+    def perform_update(self, serializer):
+        serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
+        serializer.save()

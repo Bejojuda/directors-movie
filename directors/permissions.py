@@ -8,10 +8,14 @@ class IsSelfOrReadOnly(permissions.BasePermission):
     """
 
     def has_object_permission(self, request, view, obj):
+        print(type(request.user))
         # Read permissions are allowed to any request,
         # so we'll always allow GET, HEAD or OPTIONS requests.
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        # Write permissions are only allowed to the owner of the snippet.
-        return settings.AUTH_USER_MODEL == request.user
+        if request.user.username == obj.username:
+            return True
+        else:
+            return False
+        
