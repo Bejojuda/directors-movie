@@ -27,7 +27,7 @@ Provide links to the directors/ and movies/ end points
      "Authorization: Bearer yJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9"
      ```
 
-- "directors/" - Directors List:
+- "api/directors/" - Directors List:
      - GET/: A list of all directors
      - POST/: Creates a new user with the following fields:
 
@@ -38,12 +38,12 @@ Provide links to the directors/ and movies/ end points
           }
           ```
 
-- "directors/id/" - Specific director's details:
+- "api/directors/id/" - Specific director's details:
      - GET/: get the attributes of the specific director
      - PATCH/: (Requires Token) update the user password
      - DELETE/: (Requires Token) delete the user
      
-- "movies/" - Movie List:
+- "api/movies/" - Movie List:
      - GET/: list of all movies
      - POST/: (Requires Token) create a new movie with the following format:
           ```json
@@ -55,7 +55,7 @@ Provide links to the directors/ and movies/ end points
           }
           ```
   
- - "movies/id/" - Specific movie details:
+ - "api/movies/id/" - Specific movie details:
      - GET/: Specific movie details
      - PATCH/: (Requires Token) update the movie attributes.
      - DELETE/: (Requires Token and to be the owner) delete the movie
