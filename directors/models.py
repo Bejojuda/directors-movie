@@ -8,8 +8,6 @@ class Director(AbstractUser):
     category = (('action', 'Action'), ('romance', 'Romance'))
 
     genre = models.CharField(max_length=40, choices=category, default='action')
-    
-    #date_joined = models.DateTimeField()
 
     def __str__(self):
         return self.username

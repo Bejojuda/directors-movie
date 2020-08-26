@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from accounts.models import Movie
-from accounts.serializers import MovieSerializer
+from accounts.serializers import MovieViewSerializer
 
 from .models import Director
 
@@ -10,7 +10,7 @@ class DirectorSerializer(serializers.ModelSerializer):
     # movies = serializers.PrimaryKeyRelatedField(many=True, queryset=Movie.objects.all())
 
     # Así se muestra las propiedades de la pelicula
-    movies = MovieSerializer(many=True, required=False)
+    movies = MovieViewSerializer(many=True, required=False)
     password = serializers.CharField(
         write_only=True,
         required=True,
@@ -29,7 +29,6 @@ class DirectorSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'genre', 'password', 'movies']
 
 
-# HYPERLINK
 '''
 class DirectorSerializer(serializers.HyperlinkedModelSerializer):
     movies = serializers.HyperlinkedRelatedField(many=True, view_name='movie-detail', read_only=True)

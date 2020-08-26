@@ -11,7 +11,13 @@ class MovieSerializer(serializers.ModelSerializer):
     
         fields = ['id', 'name', 'director', 'duration', 'genre', 'description']
         
-# SERIALIZER PEQUEÑO
+
+class MovieViewSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Movie
+        fields = ['id', 'name', 'duration', 'genre', 'description']
+        
 '''
 
  

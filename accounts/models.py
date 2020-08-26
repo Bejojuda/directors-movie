@@ -1,17 +1,6 @@
 from django.db import models
 from django.conf import settings
 
-''''
-class Director(models.Model):
-    name = models.CharField(max_length=30)
-    email = models.EmailField(max_length=50)
-    age = models.IntegerField()
-
-    def __str__(self):
-        return self.name
-
-'''
-
 class Movie(models.Model):
     GENRE_CHOICES = [
         ('Action', 'Action'),
