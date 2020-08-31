@@ -1,4 +1,4 @@
-from .serializers import DirectorSerializer
+from .serializers import DirectorSerializer, DirectorUpdateSerializer
 from .permissions import IsSelfOrReadOnly
 from .models import Director
 
@@ -27,7 +27,7 @@ class DirectorView(generics.GenericAPIView, mixins.ListModelMixin, mixins.Create
 
 class DirectorDetailsView(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsSelfOrReadOnly]
-    serializer_class = DirectorSerializer
+    serializer_class = DirectorUpdateSerializer
 
     queryset = Director.objects.all()
 
@@ -41,5 +41,6 @@ class DirectorDetailsView(generics.GenericAPIView, mixins.RetrieveModelMixin, mi
         return self.destroy(request, pk)
 
     def perform_update(self, serializer):
-        serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
+        if 'password' in serializer.validated_data:
+            serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
         serializer.save()

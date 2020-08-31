@@ -56,4 +56,4 @@ class MovieDetailsView(generics.GenericAPIView, mixins.RetrieveModelMixin, mixin
         return self.update(request, pk)
     
     def delete(self, request, pk):
-        return self.delete(request, pk)
+        return self.destroy(request, pk)

@@ -13,7 +13,7 @@ class DirectorSerializer(serializers.ModelSerializer):
     movies = MovieViewSerializer(many=True, required=False)
     password = serializers.CharField(
         write_only=True,
-        required=True,
+        # required=False,
         help_text='Leave empty if no change needed',
         style={'input_type': 'password', 'placeholder': 'Password'}
     )
@@ -29,6 +29,28 @@ class DirectorSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'genre', 'password', 'movies']
 
 
+class DirectorUpdateSerializer(serializers.ModelSerializer):
+    # movies = serializers.HyperlinkedRelatedField(many=True, view_name='movie-detail', read_only=True)
+    # movies = serializers.PrimaryKeyRelatedField(many=True, queryset=Movie.objects.all())
+
+    # Así se muestra las propiedades de la pelicula
+    movies = MovieViewSerializer(many=True, required=False)
+    password = serializers.CharField(
+        write_only=True,
+        required=False,
+        help_text='Leave empty if no change needed',
+        style={'input_type': 'password', 'placeholder': 'Password'}
+    )
+    
+    # def create(self, validated_data):
+        # print(validated_data)
+        # validated_data['password'] = make_password(validated_data.get('password'))
+        # return super(DirectorSerializer, self).create(validated_data)
+
+    class Meta:
+        model = Director
+        
+        fields = ['id', 'username', 'email', 'genre', 'password', 'movies']
 '''
 class DirectorSerializer(serializers.HyperlinkedModelSerializer):
     movies = serializers.HyperlinkedRelatedField(many=True, view_name='movie-detail', read_only=True)
