@@ -17,11 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+from .views import MyTokenObtainPairView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/movies/', include('accounts.urls')),
     path('api/directors/', include('directors.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/token/', TokenObtainPairView.as_view()),
+    
+    path('login/', MyTokenObtainPairView.as_view()),
     path('api/token/refresh', TokenRefreshView.as_view()),
 ]
